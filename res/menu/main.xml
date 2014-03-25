@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="codepath.apps.gridimagesearch.MainActivity" >
+	<item android:id="@+id/search"
+          android:title="@string/search_title"
+          android:icon="@drawable/ic_search"
+          android:showAsAction="always"
+          android:maxWidth="60dp"
+          android:actionViewClass="android.widget.SearchView" />
+	<item
+        android:id="@+id/miSettings"
+        android:title="@string/search_settings"
+        android:icon="@drawable/ic_gear"
+        android:showAsAction="always"
+        android:onClick="onSettingsPressed" />
+</menu>

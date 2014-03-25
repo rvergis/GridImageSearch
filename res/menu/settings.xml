@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="codepath.apps.gridimagesearch.SearchSettingsActivity" >
+	<item
+        android:id="@+id/miSave"
+        android:icon="@drawable/ic_launcher"
+        android:onClick="onSaveSettingsPressed"
+        android:showAsAction="always"
+        android:title="Save">
+    </item>
+    
+</menu>
