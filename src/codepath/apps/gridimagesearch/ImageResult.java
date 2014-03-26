@@ -17,6 +17,8 @@ public class ImageResult implements Serializable {
 	
 	private String thumbUrl;
 	
+	private String imageText;
+	
 	private static final String LOGGER_NAME = "GridImageSearch";
 	
 	public ImageResult(JSONObject json) {
@@ -24,6 +26,7 @@ public class ImageResult implements Serializable {
 			try {			
 				this.fullUrl = json.getString("url");
 				this.thumbUrl = json.getString("tbUrl");
+				this.imageText = json.getString("titleNoFormatting");
 			} catch(Exception e) {
 				this.fullUrl = null;
 				this.thumbUrl = null;
@@ -38,6 +41,10 @@ public class ImageResult implements Serializable {
 
 	public String getThumbUrl() {
 		return thumbUrl;
+	}
+
+	public String getImageText() {
+		return imageText;
 	}
 
 	@Override

@@ -5,9 +5,12 @@ import com.loopj.android.image.SmartImageView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 
 public class ImageDisplayActivity extends Activity {
 
+	private Toast toast;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -19,8 +22,11 @@ public class ImageDisplayActivity extends Activity {
 		if (imageResult.getFullUrl() != null) {
 			ivImage.setImageUrl(imageResult.getFullUrl());			
 		}
+		
+		toast = Toast.makeText(this, imageResult.getImageText(), Toast.LENGTH_LONG);
+		toast.show();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
