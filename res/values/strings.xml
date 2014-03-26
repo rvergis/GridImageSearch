@@ -11,6 +11,11 @@
     <string name="no_results">No Results</string>
     <string name="title_activity_image_display">ImageDisplayActivity</string>
     
+    <string name="tvImageSize">Image Size</string>
+    <string name="tvImageType">Image Size</string>
+    <string name="tvColorFilter">Image Color</string>
+    <string name="tvSiteFilter">Site Filter</string>
+    
     <string-array name="image_sizes">
         <item>icon</item>
         <item>small</item>
