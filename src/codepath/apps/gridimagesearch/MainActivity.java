@@ -129,10 +129,6 @@ public class MainActivity extends Activity implements ISearchResponse {
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-				if (totalItemCount >= GOOGLE_IMAGE_SEARCH_MAX_ALLOWED) {
-					Toast toast = Toast.makeText(getApplicationContext(), "Cannot search beyond " + GOOGLE_IMAGE_SEARCH_MAX_ALLOWED + " images", Toast.LENGTH_SHORT);
-					toast.show();
-				}
 				int start = SearchSettings.instance.getSearchStart();
 				start = start + 1;
 				SearchSettings.instance.setSearchStart(start);
