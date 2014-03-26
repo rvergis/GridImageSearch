@@ -72,19 +72,16 @@ public class MainActivity extends Activity implements ISearchResponse {
 
 	@Override
 	public void onSearchSuccess(Object request, Object response) {
-		imageAdapter.processResponse(response);
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				toggleGrid(true);
-				int start = SearchSettings.instance.getSearchStart();
-				start = start + 1;
-				if (start <= 3) {
-					SearchSettings.instance.setSearchStart(start);
-					search(SearchSettings.instance.getSearchQuery());
-				}
+		int results = imageAdapter.processResponse(response);
+		int start = SearchSettings.instance.getSearchStart();
+		if (results > 0) {
+			toggleGrid(true);
+		} else {
+			if (start == 0) {
+				toggleGrid(false);
 			}
-		});
+		}
+		
 	}
 
 	@Override
@@ -119,10 +116,15 @@ public class MainActivity extends Activity implements ISearchResponse {
 				}
 			}			
 		});		
-		gvResults.setOnScrollListener(new OnScrollListener() {			
+		gvResults.setOnScrollListener(new OnScrollListener() {	
+			
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				Log.i(LOGGER_NAME, "scroll state changed");
+				Log.i(LOGGER_NAME, "scroll state changed");				
+				int start = SearchSettings.instance.getSearchStart();
+				start = start + 1;
+				SearchSettings.instance.setSearchStart(start);
+				SearchClient.instance.search(SearchSettings.instance, MainActivity.this);																	
 			}			
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
@@ -130,15 +132,13 @@ public class MainActivity extends Activity implements ISearchResponse {
 				if (totalItemCount >= GOOGLE_IMAGE_SEARCH_MAX_ALLOWED) {
 					Toast toast = Toast.makeText(getApplicationContext(), "Cannot search beyond " + GOOGLE_IMAGE_SEARCH_MAX_ALLOWED + " images", Toast.LENGTH_SHORT);
 					toast.show();
-				} else {
-					if (totalItemCount > 0) {
-						int start = SearchSettings.instance.getSearchStart();
-						start = start + 1;
-						if (start <= GOOGLE_IMAGE_SEARCH_START_ALLOWED) {
-							SearchSettings.instance.setSearchStart(start);
-							SearchClient.instance.search(SearchSettings.instance, MainActivity.this);												
-						}						
-					}
+				}
+				if (visibleItemCount >= totalItemCount) {
+					int start = SearchSettings.instance.getSearchStart();
+					start = start + 1;
+					SearchSettings.instance.setSearchStart(start);
+					SearchClient.instance.search(SearchSettings.instance, MainActivity.this);
+
 				}
 			}
 		});

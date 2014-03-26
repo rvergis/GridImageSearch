@@ -55,7 +55,7 @@ public class ImageResultsArrayAdapter extends ArrayAdapter<ImageResult> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public boolean processResponse(Object responseObj) {
+	public int processResponse(Object responseObj) {
 		Map<String, Object> responseMap = (Map<String, Object>) responseObj;
 		Object response = responseMap.get(SearchClient.RESPONSE);
 		JSONArray results = null;
@@ -83,10 +83,10 @@ public class ImageResultsArrayAdapter extends ArrayAdapter<ImageResult> {
 					imageResults.add(processedList.get(i));								
 				}
 				notifyDataSetChanged();
-				return true;
+				return results.length();
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 }
