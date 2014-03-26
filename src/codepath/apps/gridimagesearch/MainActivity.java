@@ -131,11 +131,13 @@ public class MainActivity extends Activity implements ISearchResponse {
 					Toast toast = Toast.makeText(getApplicationContext(), "Cannot search beyond " + GOOGLE_IMAGE_SEARCH_MAX_ALLOWED + " images", Toast.LENGTH_SHORT);
 					toast.show();
 				} else {
-					int start = SearchSettings.instance.getSearchStart();
-					start = start + 1;
-					if (start <= GOOGLE_IMAGE_SEARCH_START_ALLOWED) {
-						SearchSettings.instance.setSearchStart(start);
-						SearchClient.instance.search(SearchSettings.instance, MainActivity.this);												
+					if (totalItemCount > 0) {
+						int start = SearchSettings.instance.getSearchStart();
+						start = start + 1;
+						if (start <= GOOGLE_IMAGE_SEARCH_START_ALLOWED) {
+							SearchSettings.instance.setSearchStart(start);
+							SearchClient.instance.search(SearchSettings.instance, MainActivity.this);												
+						}						
 					}
 				}
 			}
